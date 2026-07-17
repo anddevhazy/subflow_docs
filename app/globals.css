@@ -1,0 +1,208 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Monnify brand palette (unchanged from the original design) */
+  --gold: #c9971f;
+  --gold-dark: #8a6416;
+  --gold-light: #fbf1dc;
+  --green: #1e9a5a;
+  --green-dark: #166e42;
+  --green-light: #eaf7ef;
+  --blue: #3e7be0;
+  --blue-dark: #2a56a8;
+  --blue-light: #eaf0fd;
+  --text: #1b1a17;
+  --text-secondary: #63625b;
+  --text-muted: #96958c;
+  --code-bg: #f4f3ec;
+  --code-text: #2c2c28;
+
+  /* shadcn semantic tokens, mapped onto the brand palette above */
+  --background: #ffffff;
+  --foreground: var(--text);
+  --card: #ffffff;
+  --card-foreground: var(--text);
+  --popover: #ffffff;
+  --popover-foreground: var(--text);
+  --primary: var(--gold);
+  --primary-foreground: #ffffff;
+  --secondary: var(--code-bg);
+  --secondary-foreground: var(--code-text);
+  --muted: #f7f6f2;
+  --muted-foreground: var(--text-muted);
+  --accent: var(--gold-light);
+  --accent-foreground: var(--gold-dark);
+  --destructive: #c0392b;
+  --border: #ebe8e0;
+  --input: #ebe8e0;
+  --ring: var(--gold);
+  --radius: 0.5rem;
+}
+
+.dark {
+  /* Monnify brand palette, dark-mode variants */
+  --gold: #e0b13a;
+  --gold-dark: #f2c968;
+  --gold-light: #2c2311;
+  --green: #34c37f;
+  --green-dark: #6bdba3;
+  --green-light: #12271c;
+  --blue: #6d9bf0;
+  --blue-dark: #9dbdf5;
+  --blue-light: #16243c;
+  --text: #f2f0e8;
+  --text-secondary: #b3ae9f;
+  --text-muted: #85806f;
+  --code-bg: #232019;
+  --code-text: #e8e5da;
+
+  /* shadcn semantic tokens, mapped onto the brand palette above */
+  --background: #15140f;
+  --foreground: var(--text);
+  --card: #1c1a13;
+  --card-foreground: var(--text);
+  --popover: #1c1a13;
+  --popover-foreground: var(--text);
+  --primary: var(--gold);
+  --primary-foreground: #1b1a17;
+  --secondary: var(--code-bg);
+  --secondary-foreground: var(--code-text);
+  --muted: #201e16;
+  --muted-foreground: var(--text-muted);
+  --accent: var(--gold-light);
+  --accent-foreground: var(--gold-dark);
+  --destructive: #e5584a;
+  --border: #332f22;
+  --input: #332f22;
+  --ring: var(--gold);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-gold: var(--gold);
+  --color-gold-dark: var(--gold-dark);
+  --color-gold-light: var(--gold-light);
+  --color-green: var(--green);
+  --color-green-dark: var(--green-dark);
+  --color-green-light: var(--green-light);
+  --color-blue: var(--blue);
+  --color-blue-dark: var(--blue-dark);
+  --color-blue-light: var(--blue-light);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-code-bg: var(--code-bg);
+  --color-code-text: var(--code-text);
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    @apply scroll-smooth font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Doc content typography — scoped to rendered page content, replacing the
+   original raw-tag global CSS so every migrated page keeps its exact look. */
+.docs-prose h2 {
+  @apply mt-11 mb-3.5 text-[22px] leading-tight font-bold tracking-tight scroll-mt-[120px];
+}
+.docs-prose h3 {
+  @apply mt-7 mb-2.5 text-lg font-semibold scroll-mt-[120px];
+}
+.docs-prose p {
+  @apply mb-4 text-text-secondary;
+}
+.docs-prose ul,
+.docs-prose ol {
+  @apply mb-4 ml-[22px];
+}
+.docs-prose li {
+  @apply mb-1.5;
+}
+.docs-prose strong {
+  @apply font-semibold;
+}
+.docs-prose em {
+  @apply text-text-secondary italic;
+}
+.docs-prose blockquote {
+  @apply mb-5 border-l-[3px] border-gold py-0.5 pl-4 text-[16px] text-text-secondary italic;
+}
+.docs-prose code.inline {
+  @apply rounded bg-code-bg px-1.5 py-0.5 text-[0.88em] text-code-text;
+}
+.docs-prose table {
+  @apply mb-[22px] w-full border-collapse text-sm;
+}
+.docs-prose th,
+.docs-prose td {
+  @apply border-b border-border px-3 py-2.5 text-left;
+}
+.docs-prose th {
+  @apply text-[12.5px] font-semibold tracking-wide text-text-muted uppercase;
+}
+.docs-prose td code.inline {
+  @apply text-[0.85em];
+}
+.docs-prose a:not(.card) {
+  @apply font-semibold text-gold-dark underline decoration-current underline-offset-2 hover:text-gold;
+}
+
+/* Shiki / VS Code code blocks (CodeBlock component) */
+.shiki-code-block pre {
+  margin: 0;
+  padding: 0;
+  font-family:
+    var(--font-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.shiki-code-block code {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.shiki-code-block .line {
+  display: block;
+}
