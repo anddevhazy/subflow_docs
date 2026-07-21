@@ -38,15 +38,25 @@ const scenarios: Scenario[] = [
   {
     id: "success",
     title: "Successful payment",
-    description: "Customer completes checkout. Subscription activates, invoice marked paid.",
+    description:
+      "Customer completes checkout. Subscription activates, invoice marked paid.",
     status: "active",
     webhookType: "invoice.paid",
     payload: {
       id: "evt_success",
       type: "invoice.paid",
       data: {
-        invoice: { id: "inv_001", status: "paid", total: "15000.00", currency: "NGN" },
-        payment: { id: "9a1b2c3d-...", status: "succeeded", monnifyTransactionId: "TXN-MONNIFY-001234" },
+        invoice: {
+          id: "inv_001",
+          status: "paid",
+          total: "15000.00",
+          currency: "NGN",
+        },
+        payment: {
+          id: "9a1b2c3d-...",
+          status: "succeeded",
+          monnifyTransactionId: "TXN-MONNIFY-001234",
+        },
         subscription: { id: "sub_001", status: "active" },
       },
       createdAt: "2026-07-01T10:30:00.000Z",
@@ -55,14 +65,19 @@ const scenarios: Scenario[] = [
   {
     id: "insufficient",
     title: "Insufficient funds",
-    description: "The first charge attempt fails. Subscription moves to past_due, retry scheduled 24 hours out.",
+    description:
+      "The first charge attempt fails. Subscription moves to past_due, retry scheduled 24 hours out.",
     status: "past_due",
     webhookType: "payment.failed",
     payload: {
       id: "evt_failed",
       type: "payment.failed",
       data: {
-        payment: { id: "9b2c3d4e-...", status: "failed", failureReason: "Insufficient funds" },
+        payment: {
+          id: "9b2c3d4e-...",
+          status: "failed",
+          failureReason: "Insufficient funds",
+        },
         invoice: { id: "inv_002", status: "failed", total: "15000.00" },
       },
       createdAt: "2026-08-01T00:10:00.000Z",
@@ -71,14 +86,19 @@ const scenarios: Scenario[] = [
   {
     id: "grace",
     title: "Second attempt also fails",
-    description: "24 hours later, the retry fails too. Subscription moves to grace_period, next retry 7 days out.",
+    description:
+      "24 hours later, the retry fails too. Subscription moves to grace_period, next retry 7 days out.",
     status: "grace_period",
     webhookType: "payment.failed",
     payload: {
       id: "evt_expired",
       type: "payment.failed",
       data: {
-        payment: { id: "9b2c3d4e-...", status: "failed", failureReason: "Card expired" },
+        payment: {
+          id: "9b2c3d4e-...",
+          status: "failed",
+          failureReason: "Card expired",
+        },
         invoice: { id: "inv_002", status: "failed", total: "15000.00" },
       },
       createdAt: "2026-08-02T00:10:00.000Z",
@@ -87,14 +107,19 @@ const scenarios: Scenario[] = [
   {
     id: "recovered",
     title: "Payment recovered",
-    description: "A retried charge succeeds, automatically or via a redeemed recovery link. Subscription restored.",
+    description:
+      "A retried charge succeeds, automatically or via a redeemed recovery link. Subscription restored.",
     status: "active",
     webhookType: "payment.recovered",
     payload: {
       id: "evt_recovered",
       type: "payment.recovered",
       data: {
-        payment: { id: "9b2c3d4e-...", status: "succeeded", monnifyTransactionId: "TXN-MONNIFY-005678" },
+        payment: {
+          id: "9b2c3d4e-...",
+          status: "succeeded",
+          monnifyTransactionId: "TXN-MONNIFY-005678",
+        },
         invoice: { id: "inv_002", status: "paid", total: "15000.00" },
       },
       createdAt: "2026-08-03T14:00:00.000Z",
@@ -110,7 +135,11 @@ const scenarios: Scenario[] = [
       id: "evt_cancelled",
       type: "subscription.cancelled",
       data: {
-        subscription: { id: "sub_001", status: "cancelled", cancelledAt: "2026-07-20T12:00:00.000Z" },
+        subscription: {
+          id: "sub_001",
+          status: "cancelled",
+          cancelledAt: "2026-07-20T12:00:00.000Z",
+        },
       },
       createdAt: "2026-07-20T12:00:00.000Z",
     },
@@ -189,7 +218,8 @@ export default function Playground() {
   const [activeScenario, setActiveScenario] = useState(scenarios[0].id);
   const [codeTab, setCodeTab] = useState<CodeTab>("curl");
 
-  const scenario = scenarios.find((s) => s.id === activeScenario) ?? scenarios[0];
+  const scenario =
+    scenarios.find((s) => s.id === activeScenario) ?? scenarios[0];
 
   const codeExamples: Record<CodeTab, string> = {
     curl: curlExample,
@@ -201,15 +231,17 @@ export default function Playground() {
   return (
     <>
       <p>
-        Everything on this page is static, no request actually leaves your browser. It exists to show request
-        shapes in the language you&apos;re integrating in, and the exact webhook payload a given outcome produces,
+        Everything on this page is static, no request actually leaves your
+        browser. It exists to show request shapes in the language you&apos;re
+        integrating in, and the exact webhook payload a given outcome produces,
         without you having to run the calls yourself first.
       </p>
 
       <Callout variant="note">
         <p>
-          Every example authenticates with a JWT bearer token, not an API key. Issuing and rotating API keys works
-          today, but no endpoint currently accepts one for authentication, see{" "}
+          Every example authenticates with a JWT bearer token, not an API key.
+          Issuing and rotating API keys works today, but no endpoint currently
+          accepts one for authentication, see{" "}
           <a href="/developer/authentication">Authentication</a>.
         </p>
       </Callout>
@@ -223,21 +255,33 @@ export default function Playground() {
             size="sm"
             onClick={() => setCodeTab(tab)}
           >
-            {tab === "curl" ? "cURL" : tab === "node" ? "Node.js" : tab.charAt(0).toUpperCase() + tab.slice(1)}
+            {tab === "curl"
+              ? "cURL"
+              : tab === "node"
+                ? "Node.js"
+                : tab.charAt(0).toUpperCase() + tab.slice(1)}
           </Button>
         ))}
       </div>
       <CodeBlock
         code={codeExamples[codeTab]}
-        language={codeTab === "curl" ? "bash" : codeTab === "node" ? "javascript" : codeTab}
+        language={
+          codeTab === "curl"
+            ? "bash"
+            : codeTab === "node"
+              ? "javascript"
+              : codeTab
+        }
       />
 
       <h2 id="h-scenarios">Payment scenarios</h2>
       <p>
-        Select a scenario to see the subscription status it produces and the exact webhook payload your handler
-        would receive. The second and third scenarios are deliberately separate, see{" "}
-        <a href="/concepts/recovery-orchestration">Recovery orchestration</a> for why the second failed attempt,
-        not the first, is what actually opens the grace period.
+        Select a scenario to see the subscription status it produces and the
+        exact webhook payload your handler would receive. The second and third
+        scenarios are deliberately separate, see{" "}
+        <a href="/concepts/recovery-orchestration">Recovery orchestration</a>{" "}
+        for why the second failed attempt, not the first, is what actually opens
+        the grace period.
       </p>
       <div className="mb-3.5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {scenarios.map((s) => (
@@ -256,7 +300,9 @@ export default function Playground() {
               <span className="text-[13.5px] font-semibold">{s.title}</span>
               <StatusBadge status={s.status} />
             </div>
-            <p className="mt-2 text-[12.5px] text-text-muted">{s.description}</p>
+            <p className="mt-2 text-[12.5px] text-text-muted">
+              {s.description}
+            </p>
           </button>
         ))}
       </div>
@@ -270,12 +316,18 @@ export default function Playground() {
           <CardDescription>{scenario.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <CodeBlock code={JSON.stringify(scenario.payload, null, 2)} language="json" title="Outbound webhook payload" />
+          <CodeBlock
+            code={JSON.stringify(scenario.payload, null, 2)}
+            language="json"
+            title="Outbound webhook payload"
+          />
         </CardContent>
       </Card>
 
       <h2 id="h-catalog">Webhook event catalog</h2>
-      <p>The complete set of events this platform dispatches, all seven of them.</p>
+      <p>
+        The complete set of events this platform dispatches, all seven of them.
+      </p>
       <div className="space-y-4">
         {webhookEvents.map((event) => (
           <Card key={event.type}>
@@ -284,7 +336,10 @@ export default function Playground() {
               <CardDescription>{event.description}</CardDescription>
             </CardHeader>
             <CardContent>
-              <CodeBlock code={JSON.stringify(event.payload, null, 2)} language="json" />
+              <CodeBlock
+                code={JSON.stringify(event.payload, null, 2)}
+                language="json"
+              />
             </CardContent>
           </Card>
         ))}

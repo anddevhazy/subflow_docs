@@ -95,7 +95,7 @@ export default function MonnifyIntegration() {
         chart={`flowchart LR
     A["Billing cycle fires"]:::accent --> B["Charge API call"] --> C["Monnify webhook confirms outcome"] --> D["Event written · subscription updated"]:::accent2
 
-    classDef accent fill:#c9971f,stroke:#8a6416,color:#ffffff,font-weight:600;
+    classDef accent fill:#322f29,stroke:#1f1d19,color:#ffffff,font-weight:600;
     classDef accent2 fill:#1e9a5a,stroke:#166e42,color:#ffffff,font-weight:600;
 `}
       />

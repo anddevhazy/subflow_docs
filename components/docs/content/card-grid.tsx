@@ -41,7 +41,7 @@ export function CardLink({
   description: ReactNode;
   external?: boolean;
 }) {
-  const className = cn(cardBase, "card", "hover:border-gold hover:shadow-[0_2px_12px_rgba(201,151,31,0.1)]");
+  const className = cn(cardBase, "card", "hover:border-gold hover:shadow-[0_2px_12px_rgba(0,0,0,0.08)] dark:hover:shadow-[0_2px_12px_rgba(255,255,255,0.06)]");
   const content = (
     <>
       <div className={cardIconBase}>

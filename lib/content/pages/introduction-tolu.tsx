@@ -17,13 +17,79 @@ import {
 
 export const meta: PageMeta = {
   eyebrow: "Get started",
-  title: "It starts with Tolu.",
-  lede: "The subscription that almost cancelled itself.",
+  title: "It starts with Dara.",
+  lede: "A cron job silently cancelled forty-one accounts on a Friday. ",
 };
 
 export default function IntroductionTolu() {
   return (
     <>
+      <p>
+        Dara is my coursemate in school and at some point he was the backend
+        engineer on a three-person team and he was told to &quot;just add
+        subscriptions&quot; to a product already live on Monnify Checkout. The
+        ask sounded small: charge the same card every month instead of once. It
+        took two weeks longer than promised, because charging a card once and
+        charging it reliably every month turned out to be different problems.
+      </p>
+      <p>
+        So he ended up hand-rolling a status column on the customers table
+        (active, past_due, cancelled), a cron job that ran at midnight and hoped
+        for the best, and a Slack alert that fired when a charge failed so
+        someone could manually email the customer the next morning. It worked,
+        mostly, until a Friday when a bank outage failed forty-one charges at
+        once and the cron job, which couldn't have been built to distinguish
+        &quot;temporarily failed&quot; from &quot;gone,&quot; silently marked
+        all forty-one accounts cancelled. There was no retry, let alone a grace
+        period.
+      </p>
+      <p>
+        That Friday is the reason Subflow exists. We've built the engine that
+        every developer who's had to manually handle subscriptions wish had
+        existed the first time: a managed recurring-billing engine on top of
+        Monnify&apos;s payment primitives, so the next developer standing where
+        Dara stood doesn&apos;t lose a Friday night and forty-one customers to a
+        problem that was never theirs to solve from scratch.
+      </p>
+
+      <h2 id="h-why">Why this, and not something else</h2>
+      <p>
+        This doesn&apos;t just solve one person&apos;s problem, it cascades.
+      </p>
+      <ul>
+        <li>
+          It solves a real, long-standing developer problem. Nobody building on
+          Monnify should have to reinvent a subscription state machine and a
+          dunning sequence from scratch just to charge someone monthly.
+        </li>
+        <li>
+          It moves more money through Monnify. Every subscription this powers is
+          recurring transaction volume, not a one-off charge that happens once
+          and is never seen again.
+        </li>
+        <li>
+          It gives a merchant&apos;s customer a better experience. A failed
+          charge recovers itself instead of silently cancelling a subscription
+          nobody meant to lose.
+        </li>
+        <li>
+          It gives merchants less churn and more revenue. The customers who
+          almost got away don&apos;t, without her having to notice or intervene.
+        </li>
+      </ul>
+
+      <h2 id="h-demo-video">Demo video</h2>
+      <div className="mb-5 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(0,0,0,0.05)]">
+        <div className="flex aspect-video items-center justify-center bg-linear-to-br from-[#fbf4e1] via-[#f7f0dd] to-[#efe3c2] px-6 text-center">
+          <video
+            className="max-h-full max-w-full rounded-lg"
+            controls
+            src="/videos/Subflow_Demo.mov"
+          />
+        </div>
+      </div>
+
+      <h2 id="h-tolu">And then there's Tolu</h2>
       <p>
         Tolu pays ₦4,500 a month for an online course platform she&apos;s three
         modules into. Payday lands on the 28th, her card charges on the 25th.
@@ -43,18 +109,7 @@ export default function IntroductionTolu() {
         nothing was built to notice.
       </p>
 
-      <h2 id="h-demo-video">Demo video</h2>
-      <div className="mb-5 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(0,0,0,0.05)]">
-        <div className="flex aspect-video items-center justify-center bg-linear-to-br from-[#fbf4e1] via-[#f7f0dd] to-[#efe3c2] px-6 text-center">
-          <video
-            className="max-h-full max-w-full rounded-lg"
-            controls
-            src="/videos/Subflow_Demo.mov"
-          />
-        </div>
-      </div>
-
-      <h2 id="h-adaeze">And there is Adaeze</h2>
+      <h2 id="h-adaeze">And also Adaeze</h2>
       <p>
         Adaeze runs the platform Tolu subscribes to. Forty-something paying
         customers, growing every month, and until recently she was tracking
@@ -70,7 +125,7 @@ export default function IntroductionTolu() {
         back with anything better than a cold &quot;hey, did you mean to
         cancel?&quot; email.
       </p>
-      <p>Subflow is for both of them.</p>
+      <p>Subflow is for Dara, for Monnify, for Tolu, and for Adaeze.</p>
 
       <h2 id="h-what-it-is">What Subflow is</h2>
       <p>
@@ -80,8 +135,9 @@ export default function IntroductionTolu() {
       <p>
         Adaeze creates a plan through the API, ₦4,500/month, seven-day trial.
         Tolu subscribes through Adaeze&apos;s checkout flow; her card is
-        tokenised once through Monnify Checkout and stored for reuse. Every month,
-        the engine attempts the charge automatically against that stored card.
+        tokenised once through Monnify Checkout and stored for reuse. Every
+        month, the engine attempts the charge automatically against that stored
+        card.
       </p>
       <p>
         On the 25th, the charge fails. Instead of silently dropping the
@@ -157,11 +213,11 @@ export default function IntroductionTolu() {
 
       <h2 id="h-underneath">What is underneath</h2>
       <p>
-        Every payment runs through the <strong>Monnify API</strong>, Checkout for
-        tokenisation, the Charge API for each billing-cycle attempt, and inbound
-        Monnify webhooks that trigger internal state transitions the moment a
-        payment event lands, confirmed asynchronously, not guessed at from a
-        synchronous response.
+        Every payment runs through the <strong>Monnify API</strong>, Checkout
+        for tokenisation, the Charge API for each billing-cycle attempt, and
+        inbound Monnify webhooks that trigger internal state transitions the
+        moment a payment event lands, confirmed asynchronously, not guessed at
+        from a synchronous response.
       </p>
       <p>
         The service itself is a NestJS API on PostgreSQL, with BullMQ and Redis

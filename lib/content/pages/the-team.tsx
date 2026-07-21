@@ -45,7 +45,10 @@ export default function TheTeam() {
 
       <h2 id="h-builders">The builders</h2>
       <CardGrid cols={2}>
-        <Card icon={Compass} title="Benjamin Nkem - Team lead & Software Engineer">
+        <Card
+          icon={Compass}
+          title="Benjamin Nkem - Team lead & Software Engineer"
+        >
           Owns the subscription lifecycle, the event store, and the backend as a
           whole, all the pieces everything else is built on top of and the
           merchant dashboard.
@@ -58,22 +61,22 @@ export default function TheTeam() {
 
       <h2 id="h-why">Why this exists</h2>
       <p>
-        Most subscription tooling available to a Nigerian business is either a
-        raw set of payment primitives, tokenised cards, a charge endpoint, that
-        still leaves the billing logic, the recovery logic, and the reporting to
-        be built from scratch.
+        Most subscription tooling available to a Nigerian developer or business
+        is either a raw set of payment primitives, tokenised cards, a charge
+        endpoint, that still leaves the billing logic, the recovery logic, and
+        the reporting to be built from scratch.
       </p>
       <p>
         Or a subscription platform built for a market where a customer is more
-        reliably reached by email than by WhatsApp, SMS, or a USSD code.
-        Neither fits a business collecting recurring naira payments from
-        customers who live on their phones, not their inboxes.
+        reliably reached by email than by WhatsApp, SMS, or a USSD code. Neither
+        fits a business collecting recurring naira payments from customers who
+        live on their phones, not their inboxes.
       </p>
       <p>
-        Subflow is the version built for that reality, the
-        Nigerian reality: recurring billing that works the way payment behaviour
-        actually works here, and recovery that reaches people on the rails
-        they&apos;re already using.
+        Subflow is the version built for that reality, the Nigerian reality:
+        recurring billing that works the way payment behaviour actually works
+        here, and recovery that reaches people on the rails they&apos;re already
+        using.
       </p>
 
       <h2 id="h-next">What to read next</h2>

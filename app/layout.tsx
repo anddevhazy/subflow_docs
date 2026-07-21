@@ -33,7 +33,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn("h-full antialiased", inter.variable, jetbrainsMono.variable)}
+      className={cn(
+        "h-full antialiased",
+        inter.variable,
+        jetbrainsMono.variable,
+      )}
       suppressHydrationWarning
     >
       <body className="min-h-full font-sans">

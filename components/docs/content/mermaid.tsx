@@ -11,19 +11,19 @@ type MermaidProps = {
 const lightThemeVariables = {
   fontSize: "13.5px",
   primaryColor: "#ffffff",
-  primaryBorderColor: "#e5e2d9",
-  primaryTextColor: "#1a1a17",
-  lineColor: "#c9c5b8",
-  background: "#fafaf7",
+  primaryBorderColor: "#e7e5e0",
+  primaryTextColor: "#211f1c",
+  lineColor: "#c7c4bc",
+  background: "#f7f6f4",
 };
 
 const darkThemeVariables = {
   fontSize: "13.5px",
-  primaryColor: "#201e16",
-  primaryBorderColor: "#3a3626",
-  primaryTextColor: "#f2f0e8",
-  lineColor: "#5a5644",
-  background: "#1c1a13",
+  primaryColor: "#2e2c27",
+  primaryBorderColor: "#403d35",
+  primaryTextColor: "#fbfaf8",
+  lineColor: "#5c584c",
+  background: "#211f1c",
 };
 
 export function Mermaid({ chart, className }: MermaidProps) {

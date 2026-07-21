@@ -12,9 +12,10 @@ export default function SubscribersOverview() {
   return (
     <>
       <p>
-        If you&apos;re paying for something on Subflow, this is the side built for you. There&apos;s no account to
-        set up in advance, you don&apos;t need to remember a password, and you don&apos;t need to email the
-        merchant to make a change you can make yourself.
+        If you&apos;re paying for something on Subflow, this is the side
+        built for you. There&apos;s no account to set up in advance, you
+        don&apos;t need to remember a password, and you don&apos;t need to email
+        the merchant to make a change you can make yourself.
       </p>
 
       <CardGrid cols={2}>
@@ -34,9 +35,13 @@ export default function SubscribersOverview() {
 
       <h2 id="h-start">Where to start</h2>
       <p>
-        Ask your merchant for their portal link, or go to <code className="inline">/portal/login</code> on their
-        dashboard domain and enter the email you subscribed with. See{" "}
-        <a href="/subscribers/manage-your-subscription">Manage your subscription</a> for what happens next.
+        Ask your merchant for their portal link, or go to{" "}
+        <code className="inline">/portal/login</code> on their dashboard domain
+        and enter the email you subscribed with. See{" "}
+        <a href="/subscribers/manage-your-subscription">
+          Manage your subscription
+        </a>{" "}
+        for what happens next.
       </p>
     </>
   );

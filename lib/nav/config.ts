@@ -170,7 +170,10 @@ export const NAV: NavGroup[] = [
     items: [
       { slug: "architecture/overview", title: "Architecture" },
       { slug: "architecture/modules", title: "Modules" },
-      { slug: "architecture/monnify-integration", title: "Monnify integration" },
+      {
+        slug: "architecture/monnify-integration",
+        title: "Monnify integration",
+      },
       { slug: "architecture/data-flow", title: "Data flow" },
       {
         slug: "architecture/queues-and-async",
@@ -201,7 +204,7 @@ export const DESCRIPTIONS: Record<string, string> = {
   "quick-start":
     "Five real API calls: create a key, a plan, a customer, a subscription, and a webhook. No fabricated shortcuts, no endpoints that don't exist.",
   mission:
-    "The objectives behind the build, and the six things explicitly left out of this release.",
+    "Why this was built for an open brief, what actually shipped, and what's honestly still unfinished.",
   "the-team":
     "The people behind Subflow, and why recurring billing in Nigeria needed a second look.",
   "merchants/overview":
@@ -215,7 +218,7 @@ export const DESCRIPTIONS: Record<string, string> = {
   "merchants/payments":
     "Checkout sessions, charges, and payment attempts, the money-movement record underneath every invoice.",
   "merchants/payouts":
-    "Set a bank account once. Every settled payment moves out to it automatically, no manual withdrawal step.",
+    "Set a bank account once. Every settled payment moves out to it automatically, minus the platform's take rate.",
   "merchants/analytics":
     "MRR, churn, recovery rate, plan performance, computed from the same event store that powers your webhooks.",
   "merchants/customer-portal/overview":

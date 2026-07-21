@@ -35,7 +35,7 @@ export default function ChannelsUssd() {
     A --> C["2. Pause subscription"]
     A --> D["3. Cancel subscription"]
 
-    classDef accent fill:#c9971f,stroke:#8a6416,color:#ffffff,font-weight:600;
+    classDef accent fill:#322f29,stroke:#1f1d19,color:#ffffff,font-weight:600;
 `}
       />
 

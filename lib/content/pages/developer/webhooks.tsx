@@ -76,7 +76,7 @@ export default function DeveloperWebhooks() {
       <h2 id="h-subscribe">Subscribing</h2>
 
       <CodeBlock
-        code={`curl -X POST https://monnify-subscription-engine.onrender.com/webhooks \\
+        code={`curl -X POST https://subscription-billing-engine-t7ss.onrender.com/webhooks \\
   -H "Authorization: Bearer nsub_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -187,7 +187,7 @@ export default function DeveloperWebhooks() {
       </p>
 
       <CodeBlock
-        code={`curl -X POST https://monnify-subscription-engine.onrender.com/webhooks/replay \\
+        code={`curl -X POST https://subscription-billing-engine-t7ss.onrender.com/webhooks/replay \\
   -H "Authorization: Bearer nsub_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{

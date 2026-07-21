@@ -13,15 +13,19 @@ export default function ServiceInfo() {
   return (
     <>
       <p>
-        Every outbound webhook on this platform, the ones covered in <a href="/developer/webhooks">Webhooks</a>,
-        has a matching inbound leg you don&apos;t control: Monnify calling <em>this</em> API to confirm a charge or a
-        checkout outcome. Service info exists to make that leg debuggable, since it&apos;s the one integration
-        point where &quot;is this actually configured right&quot; isn&apos;t answerable from your own logs.
+        Every outbound webhook on this platform, the ones covered in{" "}
+        <a href="/developer/webhooks">Webhooks</a>, has a matching inbound leg
+        you don&apos;t control: Monnify calling <em>this</em> API to confirm a
+        charge or a checkout outcome. Service info exists to make that leg
+        debuggable, since it&apos;s the one integration point where &quot;is
+        this actually configured right&quot; isn&apos;t answerable from your own
+        logs.
       </p>
 
       <h2 id="h-snapshot">Service snapshot</h2>
       <p>
-        <code className="inline">GET /service-info</code>, authenticated, returns:
+        <code className="inline">GET /service-info</code>, authenticated,
+        returns:
       </p>
       <CodeBlock
         code={`{
@@ -29,38 +33,43 @@ export default function ServiceInfo() {
   "environment": "production",
   "serverTime": "2026-08-14T11:02:33Z",
   "nodeVersion": "v20.14.0",
-  "monnifyWebhookUrl": "https://monnify-subscription-engine.onrender.com/webhooks/monnify",
+  "monnifyWebhookUrl": "https://subscription-billing-engine-t7ss.onrender.com/webhooks/monnify",
   "webhookSecretConfigured": true,
   "monnifyApiUrl": "https://api.monnify.com"
 }`}
         language="json"
       />
       <p>
-        <code className="inline">monnifyWebhookUrl</code> is the exact URL to hand Monnify when configuring inbound
-        delivery for your account. <code className="inline">webhookSecretConfigured</code> answers the single most
-        common support question before it becomes one: whether this environment can actually verify Monnify&apos;s
-        signature at all.
+        <code className="inline">monnifyWebhookUrl</code> is the exact URL to
+        hand Monnify when configuring inbound delivery for your account.{" "}
+        <code className="inline">webhookSecretConfigured</code> answers the
+        single most common support question before it becomes one: whether this
+        environment can actually verify Monnify&apos;s signature at all.
       </p>
 
       <h2 id="h-log">Incoming request log</h2>
       <p>
-        <code className="inline">GET /service-info/requests</code>, paginated, returns the actual requests this
-        service has received, method, path, headers, signature, timestamp, body, and the status code it
-        responded with, capped at the most recent 500. Useful for the exact moment Monnify says they sent a webhook
-        and your dashboard shows no corresponding event: this is where you check whether the request arrived at
-        all, and if it did, why it might have failed signature verification.
+        <code className="inline">GET /service-info/requests</code>, paginated,
+        returns the actual requests this service has received, method, path,
+        headers, signature, timestamp, body, and the status code it responded
+        with, capped at the most recent 500. Useful for the exact moment Monnify
+        says they sent a webhook and your dashboard shows no corresponding
+        event: this is where you check whether the request arrived at all, and
+        if it did, why it might have failed signature verification.
       </p>
 
       <h2 id="h-echo">A connectivity check</h2>
       <p>
-        <code className="inline">POST /service-info/echo</code> is unauthenticated by design, it exists purely to
-        confirm a request from a given network path actually reaches this service, before you spend time debugging
-        auth or signing.
+        <code className="inline">POST /service-info/echo</code> is
+        unauthenticated by design, it exists purely to confirm a request from a
+        given network path actually reaches this service, before you spend time
+        debugging auth or signing.
       </p>
 
       <Card icon={Server} title="Not a general debugging tool">
-        This is scoped narrowly to the Monnify inbound leg. It doesn&apos;t log or replay your own outbound webhook
-        deliveries, that history lives on the dashboard&apos;s Webhooks page instead.
+        This is scoped narrowly to the Monnify inbound leg. It doesn&apos;t log
+        or replay your own outbound webhook deliveries, that history lives on
+        the dashboard&apos;s Webhooks page instead.
       </Card>
 
       <h2 id="h-next">Next</h2>

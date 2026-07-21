@@ -33,7 +33,7 @@ export default function HowItWorks() {
     F --> G["6. Recovery fires: email / WhatsApp / SMS / USSD"]
     G --> H["7. Recovered, subscription returns to active"]:::accent2
 
-    classDef accent fill:#c9971f,stroke:#8a6416,color:#ffffff,font-weight:600;
+    classDef accent fill:#322f29,stroke:#1f1d19,color:#ffffff,font-weight:600;
     classDef accent2 fill:#1e9a5a,stroke:#166e42,color:#ffffff,font-weight:600;
 `}
       />
@@ -69,9 +69,9 @@ export default function HowItWorks() {
       <p>
         A new member opens Lumen&apos;s app, picks the monthly plan, and enters
         a card. Lumen&apos;s app calls the Subscription Engine, which hands back
-        a Monnify Checkout session. The customer completes card entry inside that
-        session, the raw card number never touches Lumen&apos;s servers or the
-        Subscription Engine&apos;s. Monnify tokenises the card and returns a
+        a Monnify Checkout session. The customer completes card entry inside
+        that session, the raw card number never touches Lumen&apos;s servers or
+        the Subscription Engine&apos;s. Monnify tokenises the card and returns a
         reference. That reference is what gets charged on every future billing
         cycle; nobody re-enters card details again unless the card itself
         changes.
@@ -87,8 +87,8 @@ export default function HowItWorks() {
 
       <h2 id="h-charge">4. The charge runs against Monnify</h2>
       <p>
-        The billing engine calls Monnify&apos;s Charge API with the stored token.
-        Two branches from here.
+        The billing engine calls Monnify&apos;s Charge API with the stored
+        token. Two branches from here.
       </p>
 
       <h2 id="h-success">5a. It succeeds</h2>
@@ -104,9 +104,9 @@ export default function HowItWorks() {
       <p>
         Say the member&apos;s card expired last week and they haven&apos;t
         noticed. The Charge API call returns, but that response alone isn&apos;t
-        what decides the outcome, Monnify&apos;s own webhook confirms it a moment
-        later, and that&apos;s the signal the billing engine actually trusts.
-        Once it lands: the subscription transitions to{" "}
+        what decides the outcome, Monnify&apos;s own webhook confirms it a
+        moment later, and that&apos;s the signal the billing engine actually
+        trusts. Once it lands: the subscription transitions to{" "}
         <code className="inline">past_due</code>, a grace period starts, and a{" "}
         <code className="inline">PaymentFailed</code> event writes to the event
         store. Nothing here is a cron job scanning for failures after the fact,
@@ -122,14 +122,11 @@ export default function HowItWorks() {
         Within minutes, not days, an email goes out with a record of the
         failure, every time, no exceptions. If a phone number&apos;s on file, a
         WhatsApp or SMS notice sends too, over a real Twilio integration. The
-        automatic recovery path itself is more limited than a full self-serve
-        menu today: it resolves through one of three single-use links, retry,
-        pause, or cancel, wired into WhatsApp and USSD interactions, not yet
-        into the email body itself or an SMS reply. There&apos;s no Downgrade
-        option on that path, but a subscriber isn&apos;t stuck either way,
-        they can request a{" "}
-        <a href="/merchants/customer-portal/overview">customer portal</a>{" "}
-        link separately and pause, cancel, or switch plans there instead. See{" "}
+        automatic recovery path resolves through one of three single-use links,
+        retry, pause, or cancel, wired into WhatsApp and USSD interactions. A
+        subscriber can request a{" "}
+        <a href="/merchants/customer-portal/overview">customer portal</a> link
+        separately and pause, cancel, or switch plans there instead. See{" "}
         <a href="/concepts/recovery-orchestration">Recovery orchestration</a>{" "}
         for the exact, current shape of this, channel by channel.
       </p>
@@ -177,7 +174,7 @@ export default function HowItWorks() {
           href="/concepts/recovery-orchestration"
           icon={UserCheck}
           title="Recovery"
-          description="The recovery experience from the customer's side, and what's live today."
+          description="The recovery experience from the customer's side"
         />
         <CardLink
           href="/developer/webhooks"

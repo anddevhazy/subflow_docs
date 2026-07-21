@@ -15,7 +15,7 @@ export function stubMeta(slug: string): PageMeta {
 export function StubBody() {
   return (
     <>
-      <div className="mb-5 inline-block rounded-md border border-[#f0dfae] bg-gold-light px-2.5 py-1 text-xs font-semibold text-gold-dark">
+      <div className="mb-5 inline-block rounded-md border border-border bg-gold-light px-2.5 py-1 text-xs font-semibold text-gold-dark">
         Template page, content pending
       </div>
       <p className="text-text-secondary">

@@ -89,7 +89,7 @@ export default function ArchitectureOverview() {
     N --> S
     DW --> S
 
-    classDef accent fill:#c9971f,stroke:#8a6416,color:#ffffff,font-weight:600;
+    classDef accent fill:#322f29,stroke:#1f1d19,color:#ffffff,font-weight:600;
     classDef accent2 fill:#1e9a5a,stroke:#166e42,color:#ffffff,font-weight:600;
 `}
       />

@@ -66,7 +66,7 @@ export default function CreateAPlan() {
         </Step>
         <Step number={2} title="Or via the API">
           <CodeBlock
-            code={`curl -X POST https://monnify-subscription-engine.onrender.com/plans \\
+            code={`curl -X POST https://subscription-billing-engine-t7ss.onrender.com/plans \\
   -H "Authorization: Bearer nsub_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{

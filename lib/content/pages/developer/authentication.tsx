@@ -19,7 +19,7 @@ export default function DeveloperAuthentication() {
       </p>
 
       <CodeBlock
-        code={`curl https://monnify-subscription-engine.onrender.com/subscriptions \\
+        code={`curl https://subscription-billing-engine-t7ss.onrender.com/subscriptions \\
   -H "Authorization: Bearer nsub_live_3f1a9c2e8b4d7061..."`}
         language="bash"
       />

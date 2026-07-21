@@ -153,7 +153,8 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "POST",
         path: "/auth/password-reset/confirm",
-        description: "Confirm a password reset using the token emailed to the merchant.",
+        description:
+          "Confirm a password reset using the token emailed to the merchant.",
         auth: "public",
         requestSchema: [
           { field: "token", type: "string", required: true },
@@ -192,7 +193,10 @@ export const apiTagGroups: ApiTagGroup[] = [
           bankName: "Guaranty Trust Bank",
           bankAccountNumber: "0123456789",
           bankAccountName: "ACME SAAS LTD",
-          customerPortalSettings: { allowSwitchPlan: true, allowCancellation: true },
+          customerPortalSettings: {
+            allowSwitchPlan: true,
+            allowCancellation: true,
+          },
           branding: {},
         }),
       },
@@ -214,7 +218,8 @@ export const apiTagGroups: ApiTagGroup[] = [
           {
             field: "customerPortalSettings",
             type: "object",
-            description: "See Configure the customer portal for the current caveat on this field.",
+            description:
+              "See Configure the customer portal for the current caveat on this field.",
           },
         ],
         exampleRequest: `{
@@ -235,7 +240,8 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/merchants/banks",
-        description: "List Nigerian banks supported for payouts, sourced live from Monnify.",
+        description:
+          "List Nigerian banks supported for payouts, sourced live from Monnify.",
         auth: "jwt",
         exampleResponse: envelope([
           { code: "058", name: "Guaranty Trust Bank" },
@@ -245,7 +251,8 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "POST",
         path: "/merchants/bank/lookup",
-        description: "Verify an account number against a bank before saving it as your payout account.",
+        description:
+          "Verify an account number against a bank before saving it as your payout account.",
         auth: "jwt",
         requestSchema: [
           { field: "accountNumber", type: "string", required: true },
@@ -265,35 +272,73 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "POST",
         path: "/portal/login",
-        description: "Request a magic login link for the customer portal, emailed to the customer.",
+        description:
+          "Request a magic login link for the customer portal, emailed to the customer.",
         auth: "public",
         requestSchema: [
           { field: "email", type: "string", required: true },
-          { field: "merchantId", type: "string", required: true, description: "UUID" },
+          {
+            field: "merchantId",
+            type: "string",
+            required: true,
+            description: "UUID",
+          },
         ],
         exampleRequest: `{ "email": "chidi@example.com", "merchantId": "m1e2r3c4-h5a6-7890-merc-hant12345678" }`,
         exampleResponse: envelope(
-          { message: "Login link has been successfully generated and sent via email." },
+          {
+            message:
+              "Login link has been successfully generated and sent via email.",
+          },
           "Resource created successfully",
         ),
       },
       {
         method: "GET",
         path: "/portal/session",
-        description: "Get session state: customer, subscription, invoices, payment history, and available plans.",
+        description:
+          "Get session state: customer, subscription, invoices, payment history, and available plans.",
         auth: "public",
-        queryParams: [{ field: "token", type: "string", description: "The session token from the emailed link, required" }],
+        queryParams: [
+          {
+            field: "token",
+            type: "string",
+            description: "The session token from the emailed link, required",
+          },
+        ],
         exampleResponse: envelope({
-          customer: { id: "c1u2s3t4-d5e6-7890-cust-123456789abc", name: "Chidi Nwosu", email: "chidi@example.com" },
+          customer: {
+            id: "c1u2s3t4-d5e6-7890-cust-123456789abc",
+            name: "Chidi Nwosu",
+            email: "chidi@example.com",
+          },
           subscription: {
             id: "s1u2b3s4-d5e6-7890-subs-123456789abc",
             status: "active",
             currentPeriodEnd: "2026-08-01T00:00:00.000Z",
-            plan: { id: "p1l2a3n4-d5e6-7890-plan-123456789abc", name: "Pro Plan", amount: 15000, currency: "NGN" },
+            plan: {
+              id: "p1l2a3n4-d5e6-7890-plan-123456789abc",
+              name: "Pro Plan",
+              amount: 15000,
+              currency: "NGN",
+            },
           },
           invoices: [{ id: "i1n2v3o4-...", status: "paid", total: 15000 }],
-          payments: [{ id: "9a1b2c3d-...", status: "succeeded", createdAt: "2026-07-01T10:30:00.000Z" }],
-          plans: [{ id: "p1l2a3n4-...", name: "Pro Plan", amount: 15000, currency: "NGN" }],
+          payments: [
+            {
+              id: "9a1b2c3d-...",
+              status: "succeeded",
+              createdAt: "2026-07-01T10:30:00.000Z",
+            },
+          ],
+          plans: [
+            {
+              id: "p1l2a3n4-...",
+              name: "Pro Plan",
+              amount: 15000,
+              currency: "NGN",
+            },
+          ],
           config: {},
           branding: {},
         }),
@@ -304,15 +349,28 @@ export const apiTagGroups: ApiTagGroup[] = [
         description:
           "Execute an action: PAUSE_SUBSCRIPTION, RESUME_SUBSCRIPTION, CANCEL_SUBSCRIPTION, REACTIVATE_SUBSCRIPTION, SWITCH_PLAN, or UPDATE_CONTACT. No payment-method action exists. The API doesn't check the merchant's portal settings before executing, those are UI hints only.",
         auth: "public",
-        queryParams: [{ field: "token", type: "string", description: "The session token from the emailed link, required" }],
+        queryParams: [
+          {
+            field: "token",
+            type: "string",
+            description: "The session token from the emailed link, required",
+          },
+        ],
         requestSchema: [
           { field: "action", type: "string", required: true },
-          { field: "data", type: "object", description: "e.g. { planId } for SWITCH_PLAN" },
+          {
+            field: "data",
+            type: "object",
+            description: "e.g. { planId } for SWITCH_PLAN",
+          },
         ],
         exampleRequest: `{ "action": "SWITCH_PLAN", "data": { "planId": "p1l2a3n4-d5e6-7890-plan-123456789abc" } }`,
         exampleResponse: envelope(
           {
-            customer: { id: "c1u2s3t4-d5e6-7890-cust-123456789abc", name: "Chidi Nwosu" },
+            customer: {
+              id: "c1u2s3t4-d5e6-7890-cust-123456789abc",
+              name: "Chidi Nwosu",
+            },
             subscription: { id: "s1u2b3s4-...", status: "active" },
           },
           "Resource created successfully",
@@ -712,7 +770,8 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "POST",
         path: "/subscriptions/:id/cancel",
-        description: "Cancel a subscription immediately. Takes no body; there's no period-end option today.",
+        description:
+          "Cancel a subscription immediately. Takes no body; there's no period-end option today.",
         auth: "jwt",
         exampleResponse: envelope(
           {
@@ -1122,7 +1181,11 @@ export const apiTagGroups: ApiTagGroup[] = [
         queryParams: [
           { field: "from", type: "string" },
           { field: "to", type: "string" },
-          { field: "granularity", type: "enum", description: "day | week | month" },
+          {
+            field: "granularity",
+            type: "enum",
+            description: "day | week | month",
+          },
         ],
         exampleResponse: envelope([
           {
@@ -1176,7 +1239,8 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/analytics/customers",
-        description: "Get customer growth metrics and the top customers by revenue.",
+        description:
+          "Get customer growth metrics and the top customers by revenue.",
         auth: "jwt",
         exampleResponse: envelope({
           totalCustomers: 271,
@@ -1214,7 +1278,8 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/analytics/webhooks",
-        description: "Get webhook delivery success rate across all registered endpoints.",
+        description:
+          "Get webhook delivery success rate across all registered endpoints.",
         auth: "jwt",
         exampleResponse: envelope({
           totalDeliveries: 1204,
@@ -1232,7 +1297,11 @@ export const apiTagGroups: ApiTagGroup[] = [
         auth: "jwt",
         queryParams: [
           { field: "page", type: "number", description: "Default: 1" },
-          { field: "limit", type: "number", description: "Default: 20, max: 100" },
+          {
+            field: "limit",
+            type: "number",
+            description: "Default: 20, max: 100",
+          },
         ],
         exampleResponse: envelope({
           data: [
@@ -1259,11 +1328,16 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/audit/logs",
-        description: "List audit log entries for the current merchant, most recent first.",
+        description:
+          "List audit log entries for the current merchant, most recent first.",
         auth: "jwt",
         queryParams: [
           { field: "page", type: "number", description: "Default: 1" },
-          { field: "limit", type: "number", description: "Default: 20, max: 100" },
+          {
+            field: "limit",
+            type: "number",
+            description: "Default: 20, max: 100",
+          },
         ],
         exampleResponse: envelope({
           data: [
@@ -1292,14 +1366,16 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/service-info",
-        description: "A snapshot of this service's runtime info and Monnify webhook configuration.",
+        description:
+          "A snapshot of this service's runtime info and Monnify webhook configuration.",
         auth: "jwt",
         exampleResponse: envelope({
           serviceName: "Subflow",
           environment: "production",
           serverTime: "2026-08-14T11:02:33.000Z",
           nodeVersion: "v20.14.0",
-          monnifyWebhookUrl: "https://monnify-subscription-engine.onrender.com/webhooks/monnify",
+          monnifyWebhookUrl:
+            "https://subscription-billing-engine-t7ss.onrender.com/webhooks/monnify",
           webhookSecretConfigured: true,
           monnifyApiUrl: "https://api.monnify.com",
         }),
@@ -1307,12 +1383,21 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/service-info/requests",
-        description: "Paginated log of the most recent incoming requests this service has received, capped at 500.",
+        description:
+          "Paginated log of the most recent incoming requests this service has received, capped at 500.",
         auth: "jwt",
         queryParams: [
           { field: "page", type: "number", description: "Default: 1" },
-          { field: "limit", type: "number", description: "Default: 20, max: 100" },
-          { field: "category", type: "string", description: "Filter by request category, e.g. monnify-webhook" },
+          {
+            field: "limit",
+            type: "number",
+            description: "Default: 20, max: 100",
+          },
+          {
+            field: "category",
+            type: "string",
+            description: "Filter by request category, e.g. monnify-webhook",
+          },
         ],
         exampleResponse: envelope({
           data: [
@@ -1352,11 +1437,16 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/events",
-        description: "Paginated timeline of domain events for the current merchant, most recent first.",
+        description:
+          "Paginated timeline of domain events for the current merchant, most recent first.",
         auth: "jwt",
         queryParams: [
           { field: "page", type: "number", description: "Default: 1" },
-          { field: "limit", type: "number", description: "Default: 20, max: 100" },
+          {
+            field: "limit",
+            type: "number",
+            description: "Default: 20, max: 100",
+          },
         ],
         exampleResponse: envelope({
           data: [
@@ -1374,7 +1464,8 @@ export const apiTagGroups: ApiTagGroup[] = [
       {
         method: "GET",
         path: "/events/:id",
-        description: "A single timeline event by id, including its full payload.",
+        description:
+          "A single timeline event by id, including its full payload.",
         auth: "jwt",
         exampleResponse: envelope({
           id: "e1v2e3n4-t5i6-7890-evnt-123456789abc",
@@ -1400,7 +1491,11 @@ export const apiTagGroups: ApiTagGroup[] = [
           "Redeems a single-use retry, pause, or cancel link and returns a minimal HTML confirmation page, not JSON.",
         auth: "public",
         queryParams: [
-          { field: "token", type: "string", description: "The single-use token from a recovery link, required" },
+          {
+            field: "token",
+            type: "string",
+            description: "The single-use token from a recovery link, required",
+          },
         ],
         exampleResponse: `<!doctype html>
 <html>
@@ -1420,7 +1515,11 @@ export const apiTagGroups: ApiTagGroup[] = [
         requestSchema: [
           { field: "sessionId", type: "string", required: true },
           { field: "phoneNumber", type: "string", required: true },
-          { field: "text", type: "string", description: "Accumulated menu input for this session" },
+          {
+            field: "text",
+            type: "string",
+            description: "Accumulated menu input for this session",
+          },
         ],
         exampleResponse: `CON Welcome to Subflow
 1. Check status
@@ -1435,8 +1534,18 @@ export const apiTagGroups: ApiTagGroup[] = [
           "Inbound receiver for a WhatsApp recovery button tap. Accepts a simplified payload shape, not Twilio's real form-encoded webhook body.",
         auth: "public",
         requestSchema: [
-          { field: "from", type: "string", required: true, description: "The subscriber's phone number" },
-          { field: "action", type: "string", required: true, description: "retry | pause | cancel" },
+          {
+            field: "from",
+            type: "string",
+            required: true,
+            description: "The subscriber's phone number",
+          },
+          {
+            field: "action",
+            type: "string",
+            required: true,
+            description: "retry | pause | cancel",
+          },
         ],
         exampleResponse: envelope({ received: true }),
       },
@@ -1527,7 +1636,10 @@ export const webhookEvents = [
       id: "evt_005",
       type: "payment.recovered",
       data: {
-        payment: { id: "9a1b2c3d-e4f5-6789-paym-123456789abc", status: "succeeded" },
+        payment: {
+          id: "9a1b2c3d-e4f5-6789-paym-123456789abc",
+          status: "succeeded",
+        },
         invoice: { id: "i1n2v3o4-d5e6-7890-inv1-234567890abc", status: "paid" },
       },
       createdAt: "2026-08-03T14:00:00.000Z",

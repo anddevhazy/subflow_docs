@@ -5,80 +5,128 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Monnify brand palette (unchanged from the original design) */
-  --gold: #c9971f;
-  --gold-dark: #8a6416;
-  --gold-light: #fbf1dc;
+  /* Ported verbatim from the dashboard's colour system (neutral base,
+     unused indigo/emerald scales kept for parity). */
+  --surface: #ffffff;
+  --brand-50: #eef2ff;
+  --brand-100: #e0e7ff;
+  --brand-200: #c7d2fe;
+  --brand-300: #a5b4fc;
+  --brand-400: #818cf8;
+  --brand-500: #6366f1;
+  --brand-600: #4f46e5;
+  --brand-700: #4338ca;
+  --brand-800: #3730a3;
+  --brand-900: #312e81;
+  --brand-950: #1e1b4b;
+  --accent-300: #6ee7b7;
+  --accent-400: #34d399;
+  --accent-500: #10b981;
+  --accent-600: #059669;
+
+  /* shadcn semantic tokens, matching the dashboard exactly */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.153 0.006 107.1);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.153 0.006 107.1);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.153 0.006 107.1);
+  --primary: oklch(0.228 0.013 107.4);
+  --primary-foreground: oklch(0.988 0.003 106.5);
+  --secondary: oklch(0.966 0.005 106.5);
+  --secondary-foreground: oklch(0.228 0.013 107.4);
+  --muted: oklch(0.966 0.005 106.5);
+  --muted-foreground: oklch(0.58 0.031 107.3);
+  --accent: oklch(0.966 0.005 106.5);
+  --accent-foreground: oklch(0.228 0.013 107.4);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.93 0.007 106.5);
+  --input: oklch(0.93 0.007 106.5);
+  --ring: oklch(0.737 0.021 106.9);
+  --chart-1: oklch(0.88 0.011 106.6);
+  --chart-2: oklch(0.58 0.031 107.3);
+  --chart-3: oklch(0.466 0.025 107.3);
+  --chart-4: oklch(0.394 0.023 107.4);
+  --chart-5: oklch(0.286 0.016 107.4);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.988 0.003 106.5);
+  --sidebar-foreground: oklch(0.153 0.006 107.1);
+  --sidebar-primary: oklch(0.228 0.013 107.4);
+  --sidebar-primary-foreground: oklch(0.988 0.003 106.5);
+  --sidebar-accent: oklch(0.966 0.005 106.5);
+  --sidebar-accent-foreground: oklch(0.228 0.013 107.4);
+  --sidebar-border: oklch(0.93 0.007 106.5);
+  --sidebar-ring: oklch(0.737 0.021 106.9);
+
+  /* Docs-only tokens (not part of the dashboard's system): the old gold
+     brand accent is retired and now resolves to the neutral primary/muted
+     tokens above, so every place that used to read as "branded gold" now
+     reads as the dashboard's plain neutral emphasis. Green/blue stay as
+     functional status colors (success/info), same role the dashboard gives
+     its own --destructive amid an otherwise neutral palette. */
+  --text: var(--foreground);
+  --text-secondary: oklch(0.4 0.015 107.2);
+  --text-muted: var(--muted-foreground);
+  --code-bg: var(--muted);
+  --code-text: var(--foreground);
+  --gold: var(--foreground);
+  --gold-dark: var(--foreground);
+  --gold-light: var(--muted);
   --green: #1e9a5a;
   --green-dark: #166e42;
   --green-light: #eaf7ef;
   --blue: #3e7be0;
   --blue-dark: #2a56a8;
   --blue-light: #eaf0fd;
-  --text: #1b1a17;
-  --text-secondary: #63625b;
-  --text-muted: #96958c;
-  --code-bg: #f4f3ec;
-  --code-text: #2c2c28;
-
-  /* shadcn semantic tokens, mapped onto the brand palette above */
-  --background: #ffffff;
-  --foreground: var(--text);
-  --card: #ffffff;
-  --card-foreground: var(--text);
-  --popover: #ffffff;
-  --popover-foreground: var(--text);
-  --primary: var(--gold);
-  --primary-foreground: #ffffff;
-  --secondary: var(--code-bg);
-  --secondary-foreground: var(--code-text);
-  --muted: #f7f6f2;
-  --muted-foreground: var(--text-muted);
-  --accent: var(--gold-light);
-  --accent-foreground: var(--gold-dark);
-  --destructive: #c0392b;
-  --border: #ebe8e0;
-  --input: #ebe8e0;
-  --ring: var(--gold);
-  --radius: 0.5rem;
 }
 
 .dark {
-  /* Monnify brand palette, dark-mode variants */
-  --gold: #e0b13a;
-  --gold-dark: #f2c968;
-  --gold-light: #2c2311;
+  --background: oklch(0.153 0.006 107.1);
+  --foreground: oklch(0.988 0.003 106.5);
+  --card: oklch(0.228 0.013 107.4);
+  --card-foreground: oklch(0.988 0.003 106.5);
+  --popover: oklch(0.228 0.013 107.4);
+  --popover-foreground: oklch(0.988 0.003 106.5);
+  --primary: oklch(0.93 0.007 106.5);
+  --primary-foreground: oklch(0.228 0.013 107.4);
+  --secondary: oklch(0.286 0.016 107.4);
+  --secondary-foreground: oklch(0.988 0.003 106.5);
+  --muted: oklch(0.286 0.016 107.4);
+  --muted-foreground: oklch(0.737 0.021 106.9);
+  --accent: oklch(0.286 0.016 107.4);
+  --accent-foreground: oklch(0.988 0.003 106.5);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.58 0.031 107.3);
+  --chart-1: oklch(0.88 0.011 106.6);
+  --chart-2: oklch(0.58 0.031 107.3);
+  --chart-3: oklch(0.466 0.025 107.3);
+  --chart-4: oklch(0.394 0.023 107.4);
+  --chart-5: oklch(0.286 0.016 107.4);
+  --sidebar: oklch(0.228 0.013 107.4);
+  --sidebar-foreground: oklch(0.988 0.003 106.5);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.988 0.003 106.5);
+  --sidebar-accent: oklch(0.286 0.016 107.4);
+  --sidebar-accent-foreground: oklch(0.988 0.003 106.5);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.58 0.031 107.3);
+
+  --text: var(--foreground);
+  --text-secondary: oklch(0.8 0.02 106.8);
+  --text-muted: var(--muted-foreground);
+  --code-bg: var(--muted);
+  --code-text: var(--foreground);
+  --gold: var(--foreground);
+  --gold-dark: var(--foreground);
+  --gold-light: var(--muted);
   --green: #34c37f;
   --green-dark: #6bdba3;
   --green-light: #12271c;
   --blue: #6d9bf0;
   --blue-dark: #9dbdf5;
   --blue-light: #16243c;
-  --text: #f2f0e8;
-  --text-secondary: #b3ae9f;
-  --text-muted: #85806f;
-  --code-bg: #232019;
-  --code-text: #e8e5da;
-
-  /* shadcn semantic tokens, mapped onto the brand palette above */
-  --background: #15140f;
-  --foreground: var(--text);
-  --card: #1c1a13;
-  --card-foreground: var(--text);
-  --popover: #1c1a13;
-  --popover-foreground: var(--text);
-  --primary: var(--gold);
-  --primary-foreground: #1b1a17;
-  --secondary: var(--code-bg);
-  --secondary-foreground: var(--code-text);
-  --muted: #201e16;
-  --muted-foreground: var(--text-muted);
-  --accent: var(--gold-light);
-  --accent-foreground: var(--gold-dark);
-  --destructive: #e5584a;
-  --border: #332f22;
-  --input: #332f22;
-  --ring: var(--gold);
 }
 
 @theme inline {
@@ -100,6 +148,36 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-surface: var(--surface);
+  --color-brand-50: var(--brand-50);
+  --color-brand-100: var(--brand-100);
+  --color-brand-200: var(--brand-200);
+  --color-brand-300: var(--brand-300);
+  --color-brand-400: var(--brand-400);
+  --color-brand-500: var(--brand-500);
+  --color-brand-600: var(--brand-600);
+  --color-brand-700: var(--brand-700);
+  --color-brand-800: var(--brand-800);
+  --color-brand-900: var(--brand-900);
+  --color-brand-950: var(--brand-950);
+  --color-accent-300: var(--accent-300);
+  --color-accent-400: var(--accent-400);
+  --color-accent-500: var(--accent-500);
+  --color-accent-600: var(--accent-600);
 
   --color-gold: var(--gold);
   --color-gold-dark: var(--gold-dark);
@@ -125,6 +203,8 @@
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
 @layer base {
@@ -152,7 +232,13 @@
 }
 .docs-prose ul,
 .docs-prose ol {
-  @apply mb-4 ml-[22px];
+  @apply mb-4 ml-[22px] list-outside;
+}
+.docs-prose ul {
+  @apply list-disc;
+}
+.docs-prose ol {
+  @apply list-decimal;
 }
 .docs-prose li {
   @apply mb-1.5;

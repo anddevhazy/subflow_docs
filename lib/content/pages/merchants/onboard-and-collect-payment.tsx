@@ -24,7 +24,7 @@ export default function OnboardAndCollectPayment() {
       <Steps>
         <Step number={1} title="Your app requests a Checkout session">
           <CodeBlock
-            code={`curl -X POST https://monnify-subscription-engine.onrender.com/customers/cus_01.../checkout-session \\
+            code={`curl -X POST https://subscription-billing-engine-t7ss.onrender.com/customers/cus_01.../checkout-session \\
   -H "Authorization: Bearer nsub_live_..." \\
   -d '{"planId": "plan_lumen_monthly"}'`}
             language="bash"

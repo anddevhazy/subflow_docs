@@ -24,12 +24,14 @@ export default function ApiReferencePage() {
             </h1>
             <p className="mt-4 text-lg leading-[1.55] text-text-secondary">
               All endpoints return a standard JSON envelope. Authenticate with{" "}
-              <code className="inline">Authorization: Bearer &lt;token&gt;</code>.
+              <code className="inline">
+                Authorization: Bearer &lt;token&gt;
+              </code>
+              .
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm">
               <span className="text-text-muted">
-                Base URL:{" "}
-                <code className="inline">{API_BASE_URL}</code>
+                Base URL: <code className="inline">{API_BASE_URL}</code>
               </span>
               <Link
                 href={SWAGGER_URL}
@@ -62,7 +64,9 @@ export default function ApiReferencePage() {
               className="scroll-mt-24 space-y-6"
             >
               <div>
-                <h2 className="text-2xl font-bold tracking-tight">{group.tag}</h2>
+                <h2 className="text-2xl font-bold tracking-tight">
+                  {group.tag}
+                </h2>
                 <p className="mt-2 text-text-secondary">{group.description}</p>
               </div>
               <div className="space-y-6">

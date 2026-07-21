@@ -73,6 +73,21 @@ export default function EventStore() {
             </td>
             <td>An invoice is settled in full.</td>
           </tr>
+          <tr>
+            <td>
+              <code className="inline">PaymentFeeAssessed</code>
+            </td>
+            <td>
+              A payout actually executes, and the platform&apos;s take rate is deducted from it. See{" "}
+              <a href="/merchants/payouts">Payouts</a>.
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <code className="inline">PaymentFeeReversed</code>
+            </td>
+            <td>A previously assessed fee is reversed against a refund.</td>
+          </tr>
         </tbody>
       </table>
 
