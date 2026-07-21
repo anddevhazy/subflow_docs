@@ -78,7 +78,7 @@ export default function IntroductionTolu() {
         </li>
       </ul>
 
-      <h2 id="h-demo-video">Demo video</h2>
+      {/* <h2 id="h-demo-video">Demo video</h2>
       <div className="mb-5 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(0,0,0,0.05)]">
         <div className="flex aspect-video items-center justify-center bg-linear-to-br from-[#fbf4e1] via-[#f7f0dd] to-[#efe3c2] px-6 text-center">
           <video
@@ -87,7 +87,7 @@ export default function IntroductionTolu() {
             src="/videos/Subflow_Demo.mov"
           />
         </div>
-      </div>
+      </div> */}
 
       <h2 id="h-tolu">And then there's Tolu</h2>
       <p>
